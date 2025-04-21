@@ -1,5 +1,6 @@
 package com.visionex.employeemanagementsystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,12 +24,14 @@ public class Employees implements UserDetails {
     private String department;
     private String designation;
     private String jobTitle;
-    private String salary;
+    private Double salary;
     private String status;
     private String password;
     private String role;
 
+
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role));
     }
@@ -62,4 +65,5 @@ public class Employees implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }

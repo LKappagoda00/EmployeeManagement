@@ -26,10 +26,11 @@ public class ReqRes {
     private String jobTitle;
     private String address;
     private String password;
-    private String salary;
+    private Double salary;
     private String status;
     private Employees employees;
     private List<Employees> employeesList;
+
 
 
 

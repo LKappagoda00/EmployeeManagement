@@ -160,6 +160,13 @@ public class EmployeeManagementService {
                 existingUser.setName(updatedEmployee.getName());
                 existingUser.setJobTitle(updatedEmployee.getJobTitle());
                 existingUser.setRole(updatedEmployee.getRole());
+                existingUser.setSalary(updatedEmployee.getSalary());
+                existingUser.setJobTitle(updatedEmployee.getJobTitle());
+                existingUser.setAddress(updatedEmployee.getAddress());
+                existingUser.setPhone(updatedEmployee.getPhone());
+                existingUser.setDesignation(updatedEmployee.getDesignation());
+                existingUser.setDepartment(updatedEmployee.getDepartment());
+                existingUser.setStatus(updatedEmployee.getStatus());
 
                 // Check if password is present in the request
                 if (updatedEmployee.getPassword() != null && !updatedEmployee.getPassword().isEmpty()) {
