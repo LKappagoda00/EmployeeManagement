@@ -77,16 +77,16 @@ public class EmployeeManagementService {
         return resp;
 
     }
-    public ReqRes refreshToken(ReqRes refreshTokenReqiest){
+    public ReqRes refreshToken(ReqRes refreshTokenRequest){
         ReqRes response = new ReqRes();
         try{
-            String ourEmail = jwtUtils.extractUsername(refreshTokenReqiest.getToken());
+            String ourEmail = jwtUtils.extractUsername(refreshTokenRequest.getToken());
             Employees employees = empRepo.findByEmail(ourEmail).orElseThrow();
-            if (jwtUtils.isTokenValid(refreshTokenReqiest.getToken(), employees)) {
+            if (jwtUtils.isTokenValid(refreshTokenRequest.getToken(), employees)) {
                 var jwt = jwtUtils.generateToken(employees);
                 response.setStatusCode(200);
                 response.setToken(jwt);
-                response.setRefreshToken(refreshTokenReqiest.getToken());
+                response.setRefreshToken(refreshTokenRequest.getToken());
                 response.setExpirationTime("24Hr");
                 response.setMessage("Successfully Refreshed Token");
             }

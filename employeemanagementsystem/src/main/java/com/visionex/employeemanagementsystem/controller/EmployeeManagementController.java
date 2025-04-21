@@ -40,7 +40,7 @@ public class EmployeeManagementController {
       return ResponseEntity.ok(employeeManagementService.updateEmployee(employeeId, reqRes));
     }
 
-    @GetMapping("/adminuser/get-profile")
+    @GetMapping("/adminEmployee/get-profile")
     public ResponseEntity<ReqRes> getProfile() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email =authentication.getName();
