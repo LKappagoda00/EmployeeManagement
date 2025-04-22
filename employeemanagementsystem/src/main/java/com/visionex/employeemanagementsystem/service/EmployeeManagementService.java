@@ -29,7 +29,15 @@ public class EmployeeManagementService {
 
     public ReqRes register(ReqRes registrationRequest) {
         ReqRes resp = new ReqRes();
-        try{
+        try {
+            Optional<Employees> existingEmployee = empRepo.findByEmail(registrationRequest.getEmail());
+            if (existingEmployee.isPresent()) {
+                resp.setStatusCode(400);
+                resp.setMessage("Email already exists. Please use a different email.");
+                return resp;
+            }
+
+            // Save new employee if email is unique
             Employees employees = new Employees();
             employees.setEmail(registrationRequest.getEmail());
             employees.setPassword(passwordEncoder.encode(registrationRequest.getPassword()));
@@ -42,18 +50,20 @@ public class EmployeeManagementService {
             employees.setJobTitle(registrationRequest.getJobTitle());
             employees.setSalary(registrationRequest.getSalary());
             employees.setStatus(registrationRequest.getStatus());
+
             Employees employeesResult = empRepo.save(employees);
-            if (employeesResult.getId()>0) {
+            if (employeesResult.getId() > 0) {
                 resp.setEmployees(employeesResult);
                 resp.setMessage("Employee Registration Successful");
                 resp.setStatusCode(200);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             resp.setStatusCode(500);
             resp.setMessage(e.getMessage());
         }
         return resp;
     }
+
     public ReqRes login(ReqRes loginRequest) {
         ReqRes resp = new ReqRes();
         try {
